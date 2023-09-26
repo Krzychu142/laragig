@@ -6,16 +6,20 @@ $test = 1;
 
 {{$test}} --}}
 
-@if(count($listings) == 0)
+{{-- @if(count($listings) == 0)
     <p>No listing now</p>
-@endif
+@endif --}}
 
 
 @unless (count($listings) == 0)
 @foreach($listings as $listing) <!--- instead <?php echo $heading; ?> -->
-    <h2>{{$listing['title'];}}</h2>
+    <h2>
+        <a href="/listing/{{$listing['id']}}">
+        {{$listing['title'];}}
+        </a>
+    </h2>
     <h3>{{$listing['id'];}}</h3>
-    <p>{{$listing['desc'];}}</p>
+    <p>{{$listing['desc'];}}</p> 
 @endforeach
 
 @else

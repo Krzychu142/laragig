@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Listing; // same naming as in Models/Listing.php
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// All listing
 Route::get('/', function () {
     return view('listings', [
         'heading' => "Latest Listings",
-        "listings" => [
-            [
-            'id' => 1,
-            'title' => 'Listing one',
-            'desc' => "Lorem ipsum"  
-            ], 
-            [
-            'id' => 2,
-            'title' => 'Listing two',
-            'desc' => "Lorem ipsum"  
-            ]
-        ]
+        "listings" => Listing::all(), // double :: because it's static method
     ]);
 });
+
+// Single listing
+Route::get('/listing/{id}', function($id){
+    return view('listing', [
+        'heading' => "Latest Listings",
+        "listing" => Listing::find($id)
+    ]);
+})->where('id', '[0-9]+');
