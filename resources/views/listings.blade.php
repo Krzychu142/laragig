@@ -19,7 +19,7 @@ $test = 1;
         </a>
     </h2>
     <h3>{{$listing['id'];}}</h3>
-    <p>{{$listing['desc'];}}</p> 
+    <p>{{$listing['description'];}}</p> 
 @endforeach
 
 @else

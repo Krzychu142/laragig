@@ -19,6 +19,8 @@ use App\Models\Listing; // same naming as in Models/Listing.php
 Route::get('/', function () {
     return view('listings', [
         'heading' => "Latest Listings",
+        // methods ::all() and ::find() are valid methods of Listing
+        // because Listing is extends by Model class 
         "listings" => Listing::all(), // double :: because it's static method
     ]);
 });
