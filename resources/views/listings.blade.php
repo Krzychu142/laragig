@@ -2,6 +2,9 @@
 
 {{-- everything bottom will be displayed in an extended file in place with 'content' or any other name for it, must be the same --}}
 @section('content')
+{{-- @include('partials._hero') - just in this place display any "component", - use include when someting is used only one time and --}}
+@include('partials._hero')
+@include('partials._search')
 <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4" >
 
 {{-- @php
@@ -28,7 +31,7 @@ $test = 1;
         <div>
             <h3 class="text-2xl">
                 {{-- when we are dilling with eloquent models it gives us what's called a collection, we can use syntax with the arrow  --}}
-                <a href="show.html">{{$listing->title}}</a>
+                <a href="/listing/{{$listing->id}}">{{$listing->title}}</a>
             </h3>
             <div class="text-xl font-bold mb-4">{{$listing->company}}</div>
             <ul class="flex">

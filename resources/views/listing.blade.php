@@ -2,6 +2,7 @@
 
 {{-- everything bottom will be displayed in an extended file in place with 'content' or any other name for it, must be the same --}}
 @section('content')
+@include('partials._search')
 
 <h2>{{$listing['title'];}}</h2>
 <h3>{{$listing['id'];}}</h3>
