@@ -1,3 +1,7 @@
+@extends('layout')
+
+{{-- everything bottom will be displayed in an extended file in place with 'content' or any other name for it, must be the same --}}
+@section('content')
 <h1>{{ $heading; }}</h1>  <!--- instead <?php echo $heading; ?> -->
 
 {{-- @php
@@ -26,3 +30,5 @@ $test = 1;
 <p>No listings found</p>
 
 @endunless
+
+@endsection
