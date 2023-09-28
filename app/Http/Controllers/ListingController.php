@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 class ListingController extends Controller
 {
     // show all listings
-    public function index()
+    public function index(Request $request)
     {
+        $request->query("search");
         return view('listings.index', [
             'heading' => "Latest Listings",
             // methods ::all() and ::find() are valid methods of Listing
