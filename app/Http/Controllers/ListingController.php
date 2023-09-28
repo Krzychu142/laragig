@@ -25,7 +25,7 @@ class ListingController extends Controller
 
         // if ($listing) {
         // name convention nameoffolder.nameoffile
-        return view('listing.show', [
+        return view('listings.show', [
             "listing" => $listing
         ]);
         // } else {

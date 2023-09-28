@@ -1,8 +1,10 @@
-@extends('layout')
+{{-- @extends('layout') --}}
+{{-- <x-layout /> --}}
 
 {{-- everything bottom will be displayed in an extended file in place with 'content' or any other name for it, must be the same --}}
-@section('content')
+{{-- @section('content') --}}
 {{-- @include('partials._hero') - just in this place display any "component", - use include when someting is used only one time and --}}
+<x-layout >
 @include('partials._hero')
 @include('partials._search')
 <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4" >
@@ -34,5 +36,5 @@ $test = 1;
 
 @endunless
 </div>
-
-@endsection
+</x-layout >
+{{-- @endsection --}}

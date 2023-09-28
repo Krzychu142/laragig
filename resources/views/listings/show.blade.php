@@ -1,7 +1,8 @@
-@extends('layout')
+{{-- @extends('layout') --}}
 
 {{-- everything bottom will be displayed in an extended file in place with 'content' or any other name for it, must be the same --}}
-@section('content')
+{{-- @section('content') --}}
+<x-layout >
 @include('partials._search')
 
 
@@ -54,5 +55,5 @@
     </x-card >
     {{-- </div> --}}
 </div>
-
-@endsection
+</x-layout >
+{{-- @endsection --}}
