@@ -16,28 +16,17 @@ use App\Models\Listing; // same naming as in Models/Listing.php
 */
 
 // All listing
-Route::get('/', function () {
-    return view('listings', [
-        'heading' => "Latest Listings",
-        // methods ::all() and ::find() are valid methods of Listing
-        // because Listing is extends by Model class 
-        "listings" => Listing::all(), // double :: because it's static method
-    ]);
-});
+// replace this function {} with controller
+// brackets [NameOfController::class, 'nameOfMethod']
+Route::get('/', [ListingController::class, 'index']);
 
 // Single listing
 // thats how looks like route model binding
 // it has build in "if else with abort if dosn't exist"
-Route::get('/listing/{listing}', function (Listing $listing) {
+// Route::get('/listing/{listing}', function (Listing $listing) {
+// })->where('listing', '[0-9]+');
+Route::get('/listing/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 
-    // $listing = Listing::find($id);
+// to create a controller use php artisan make:controller NameOfController
 
-    // if ($listing) {
-    return view('listing', [
-        "listing" => $listing
-    ]);
-    // } else {
-    //     abort('404');
-    // }
-
-})->where('listing', '[0-9]+');
+// all controllers are in Http -> Controllers
