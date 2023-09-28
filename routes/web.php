@@ -26,9 +26,18 @@ Route::get('/', function () {
 });
 
 // Single listing
-Route::get('/listing/{id}', function($id){
+// thats how looks like route model binding
+// it has build in "if else with abort if dosn't exist"
+Route::get('/listing/{listing}', function (Listing $listing) {
+
+    // $listing = Listing::find($id);
+
+    // if ($listing) {
     return view('listing', [
-        'heading' => "Latest Listings",
-        "listing" => Listing::find($id)
+        "listing" => $listing
     ]);
+    // } else {
+    //     abort('404');
+    // }
+
 })->where('id', '[0-9]+');
