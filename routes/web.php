@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListingController; // remember about import
 use App\Models\Listing; // same naming as in Models/Listing.php
 
 /*

@@ -24,7 +24,8 @@ class ListingController extends Controller
         // $listing = Listing::find($id);
 
         // if ($listing) {
-        return view('listing', [
+        // name convention nameoffolder.nameoffile
+        return view('listing.show', [
             "listing" => $listing
         ]);
         // } else {
