@@ -8,13 +8,18 @@ use Illuminate\Http\Request;
 class ListingController extends Controller
 {
     // show all listings
+    // we can get access to Request object on two-way
+    // first is by dependence injection - Pass class Request to index
+    // index(Request $request)
+    // second - we can use helper - request()->query....
     public function index(Request $request)
     {
-        $request->query("search");
+//        dd($request->query('tag'));
+
         return view('listings.index', [
             'heading' => "Latest Listings",
             // methods ::all() and ::find() are valid methods of Listing
-            // because Listing is extends by Model class 
+            // because Listing extends by Model class
             "listings" => Listing::all(), // double :: because it's static method
         ]);
     }
