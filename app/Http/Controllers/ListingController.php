@@ -10,7 +10,7 @@ class ListingController extends Controller
     // show all listings
     public function index()
     {
-        return view('listings', [
+        return view('listings.index', [
             'heading' => "Latest Listings",
             // methods ::all() and ::find() are valid methods of Listing
             // because Listing is extends by Model class 

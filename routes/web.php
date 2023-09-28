@@ -31,3 +31,13 @@ Route::get('/listing/{listing}', [ListingController::class, 'show'])->where('lis
 // to create a controller use php artisan make:controller NameOfController
 
 // all controllers are in Http -> Controllers
+
+
+// common resource routes:
+// index - show all listings
+// show - show single listing
+// create - show form to create new listing 
+// store - store new listing
+// edit - show form to edit listing 
+// update - update listing 
+// destroy - delete listing 
