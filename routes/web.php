@@ -40,4 +40,4 @@ Route::get('/listing/{listing}', function (Listing $listing) {
     //     abort('404');
     // }
 
-})->where('id', '[0-9]+');
+})->where('listing', '[0-9]+');
