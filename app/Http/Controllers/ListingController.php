@@ -14,13 +14,15 @@ class ListingController extends Controller
     // second - we can use helper - request()->query....
     public function index(Request $request)
     {
-//        dd($request->query('tag'));
-
+    // dd($request->query('tag'));
+        $tags = $request->only('tag');
         return view('listings.index', [
             'heading' => "Latest Listings",
             // methods ::all() and ::find() are valid methods of Listing
             // because Listing extends by Model class
-            "listings" => Listing::all(), // double :: because it's static method
+            // "listings" => Listing::all(), // double :: because it's static method
+            // built in method to get all sorted by the latest
+            "listings" => Listing::filter($tags)->get()
         ]);
     }
 
