@@ -47,4 +47,14 @@ class ListingController extends Controller
         //     abort('404');
         // }
     }
+
+    public function create()
+    {
+        return view('listings.create');
+    }
+
+    public function store(Request $request)
+    {
+//        dd($request);
+    }
 }

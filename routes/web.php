@@ -22,22 +22,29 @@ use App\Models\Listing; // same naming as in Models/Listing.php
 Route::get('/', [ListingController::class, 'index']);
 
 // Single listing
-// thats how looks like route model binding
-// it has build in "if else with abort if dosn't exist"
+// that's how looks like route model binding
+// it has build in "if else with abort if it doesn't exist"
 // Route::get('/listing/{listing}', function (Listing $listing) {
 // })->where('listing', '[0-9]+');
+// ->name("name.of.route") - it's for form
+Route::post('/listing/store', [ListingController::class, 'store'])->name('listing.store');
+Route::get('/listing/create', [ListingController::class, 'create']);
+// it should be under create, create can be recognized as {listing}, our route is safe because we are checking this by ->where
 Route::get('/listing/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
+
+
 
 // to create a controller use php artisan make:controller NameOfController
 
 // all controllers are in Http -> Controllers
 
-
 // common resource routes:
 // index - show all listings
 // show - show single listing
-// create - show form to create new listing 
+// create - show form to create new listing
 // store - store new listing
-// edit - show form to edit listing 
-// update - update listing 
-// destroy - delete listing 
+// edit - show form to edit listing
+// update - update listing
+// destroy - delete listing
+
+// workflow to add new piece of functionality is ROUTE -> CONTROLLER -> VIEW
