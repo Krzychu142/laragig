@@ -16,15 +16,17 @@ class Listing extends Model
         // ?? - isset(), it will return first operand if it exists and is not NULL,
         // otherwise it will return second operand
         // it this case it will work like if we have $filters['tag'] - do something with this tag, if we don't have, just ignore
-        if($filters['tags']['tag'] ?? false){
+        if($filters['tag'] ?? false){
             // SQL like query
             // get all objects if in column tags they have 'whatever (%) value of $filters['tag'] whatever (%)'
-            $query->where('tags', 'like', '%' . $filters['tags']['tag'] . '%');
+            $query->where('tags', 'like', '%' . $filters['tag'] . '%');
         }
-        if($filters['search']['search'] ?? false){
+        if($filters['search'] ?? false){
+            // get every column from table listing
             $columns = Listing::getConnection()->getSchemaBuilder()->getColumnListing(Listing::getTable());
             foreach ($columns as $column){
-                $query->orWhere($column, 'like', '%' . $filters['search']['search'] . '%');
+                // check in every column for this data
+                $query->orWhere($column, 'like', '%' . $filters['search'] . '%');
             }
         }
     }
