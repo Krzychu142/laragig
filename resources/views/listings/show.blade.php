@@ -35,7 +35,7 @@
                     Job Description
                 </h3>
                 <div class="text-lg space-y-6">
-                    <p>{{$listing['description'];}}</p>
+                    <p>{{$listing['description']}}</p>
                     <a
                         href="mailto:{{$listing->email}}"
                         class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"

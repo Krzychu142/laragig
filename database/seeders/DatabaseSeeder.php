@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {   
-        // by default it will create 10 dummy users
+    {
+        // by default, it will create 10 dummy users
         // it comes from UserFactory.php
-        // php artisan db:seed - to run this
+        //  artisan db:seed - to run this
         // php artisan migrate:refresh --seed - rollback and seed with fresh data
         \App\Models\User::factory(2)->create();
 
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Listing::factory(5)->create();
+        Listing::factory(16)->create();
 
     }
 }

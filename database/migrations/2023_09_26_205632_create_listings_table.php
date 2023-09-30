@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-// to generate migrations: php artisan make:migration create_listings_table 
+// to generate migrations: php artisan make:migration create_listings_table
 
 // to redo migrate php artisan migrate:refresh - rolling back
 return new class extends Migration
@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('company');
             $table->string('location');
             $table->string('email');
-            $table->string('website');
+            // default value if it is empty
+            // remember to rerun migration to process changes
+            $table->string('website')->default('www.404.com');
             $table->longText('description'); // longText allows more text than string
             $table->timestamps();
         });
@@ -36,4 +38,4 @@ return new class extends Migration
 };
 
 
-// run the php artisan migrate command it's gonna run all the migrations from folder  
+// run the php artisan migrate command it's gonna run all the migrations from folder

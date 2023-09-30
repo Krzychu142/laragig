@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ListingController extends Controller
 {
@@ -55,6 +56,33 @@ class ListingController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request);
+        // validation in controller
+        // $request->all() - will give back all incoming request's inputs
+        // in validate pass the array with rules about data
+
+//        dd($request->all());
+
+        $formFields = $request->validate([
+            'title' => 'required',
+            // some properties can have more than 1 rule, than use []
+            // Rule class :: methods, unique("nameOfTable" "nameOfColumn")
+            'company' => ['required', Rule::unique('listings', 'company')],
+            'location' => 'required',
+            'website',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+
+        // to show error from validate we need to use @error('nameOfField') directive in view
+        // inside this error to enderror we will have access to {{$message}}
+        // @enderror
+
+        // if we are here it means validation pass
+        // to create new record in DB we need to user Listing::create()
+
+        Listing::create($formFields);
+
+        return redirect('/');
     }
 }
