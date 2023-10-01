@@ -32,9 +32,4 @@ class Listing extends Model
             }
         }
     }
-
-    public function scopeStore($query) : void
-    {
-
-    }
 }

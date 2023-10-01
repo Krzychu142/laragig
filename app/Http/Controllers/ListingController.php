@@ -59,9 +59,6 @@ class ListingController extends Controller
         // validation in controller
         // $request->all() - will give back all incoming request's inputs
         // in validate pass the array with rules about data
-
-//        dd($request->all());
-
         $formFields = $request->validate([
             'title' => 'required',
             // some properties can have more than 1 rule, than use []
@@ -83,6 +80,9 @@ class ListingController extends Controller
 
         Listing::create($formFields);
 
-        return redirect('/');
+        // flash is message ex. message created, it stored in memory for one-page load
+        // it's mean, when you refresh page or go to other URL it will disappear
+        // Session::flash('message', 'Test'); == session()->flash('message', 'Test');
+        return redirect('/')->with('message', 'Job gig created correctly!');
     }
 }

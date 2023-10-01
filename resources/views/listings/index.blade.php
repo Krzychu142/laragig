@@ -21,7 +21,7 @@ $test = 1;
 
 
 @unless (count($listings) == 0)
-@foreach($listings as $listing) <!--- instead <?php echo $heading; ?> -->
+@foreach($listings as $listing)
 
 {{-- <x-name-of-component :nameOfProp="$listing" --}}
 
