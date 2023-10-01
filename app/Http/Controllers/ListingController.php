@@ -30,7 +30,15 @@ class ListingController extends Controller
             // because Listing extends by Model class
             // "listings" => Listing::all(), // double :: because it's static method
             // built in method to get all sorted by the latest
-            "listings" => Listing::filter($request->only('tag', 'search'))->get()
+            // "listings" => Listing::filter($request->only('tag', 'search'))->get()
+            // instead of get we can use paginate(numberPerPage)
+            // You can also use simplePaginate to have just next and previous button
+            // if we don't use tailwind we need to publish pagination provider
+            // php artisan vendor:publish and pick the provider which You want
+            // we will get access to vendor/pagination with some templates
+            // then in AppServiceProvider in boot method we need to tape
+            // Paginator::userBootstrapFive (sth like that, check dock).
+            "listings" => Listing::filter($request->only('tag', 'search'))->paginate(6)
         ]);
     }
 

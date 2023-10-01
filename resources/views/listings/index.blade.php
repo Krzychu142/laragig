@@ -36,5 +36,9 @@ $test = 1;
 
 @endunless
 </div>
+    <div class="mt-6 p-4">
+        {{-- it is compatible with the twailwind, it will give pages and info about on which page You are  --}}
+        {{$listings->links()}}
+    </div>
 </x-layout >
 {{-- @endsection --}}
