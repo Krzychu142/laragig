@@ -38,7 +38,8 @@ class ListingController extends Controller
             // we will get access to vendor/pagination with some templates
             // then in AppServiceProvider in boot method we need to tape
             // Paginator::userBootstrapFive (sth like that, check dock).
-            "listings" => Listing::filter($request->only('tag', 'search'))->paginate(6)
+            // by default latest() will order by created_at, but you can provide other column
+            "listings" => Listing::filter($request->only('tag', 'search'))->latest()->paginate(6)
         ]);
     }
 
@@ -84,9 +85,9 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
-        if($request->file('logo') && $request->file('logo')->isValid()){
-            $path = $request->file('logo')->store();
-            $formFields['logo'] = $path;
+        if($request->hasFile('logo')){
+            $formFields['logo'] = $request->file('logo')->store();
+            // to make this file public remember to create a link php artisan storage:link
         }
         // to show error from validate we need to use @error('nameOfField') directive in view
         // inside this error to enderror we will have access to {{$message}}
