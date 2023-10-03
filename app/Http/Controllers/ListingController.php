@@ -64,8 +64,10 @@ class ListingController extends Controller
 
     public function store(Request $request)
     {
-        // file('nameOfInputWithFile'), store() method will save this file by default in storage
-        dd($request->file('logo')->store());
+        // file('nameOfInputWithFile'), store() method will save this file by default in storage/app
+        // in config folder is file call filesystem.php, there you will be able to change place where your files will be saved
+        // by change configuration for, for example S3
+        // $request->file('logo')->store();
         // validation in controller
         // $request->all() - will give back all incoming request's inputs
         // in validate pass the array with rules about data

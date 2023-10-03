@@ -32,7 +32,8 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            // if your images will be public - change the folder
+            'root' => storage_path('public'),
             'throw' => false,
         ],
 
