@@ -103,4 +103,12 @@ class ListingController extends Controller
         // Session::flash('message', 'Test'); == session()->flash('message', 'Test');
         return redirect('/')->with('message', 'Job gig created correctly!');
     }
+
+    public function edit(Listing $listing)
+    {
+        // so what we need to do here is create new view, and give this $listing to in and display
+        return view('listings.edit', [
+            "listing" => $listing
+        ]);
+    }
 }

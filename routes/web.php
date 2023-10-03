@@ -29,6 +29,8 @@ Route::get('/', [ListingController::class, 'index']);
 // ->name("name.of.route") - it's for form
 Route::post('/listing/store', [ListingController::class, 'store'])->name('listing.store');
 Route::get('/listing/create', [ListingController::class, 'create']);
+
+Route::get('listing/{listing}/edit', [ListingController::class, 'edit'])->where('listing', '[0-9]+');
 // it should be under create, create can be recognized as {listing}, our route is safe because we are checking this by ->where
 Route::get('/listing/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 

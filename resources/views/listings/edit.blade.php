@@ -5,36 +5,33 @@
         >
             <header class="text-center">
                 <h2 class="text-2xl font-bold uppercase mb-1">
-                    Create a Gig
+                    Edit {{$listing['title']}}
                 </h2>
                 <p class="mb-4">Post a gig to find a developer</p>
             </header>
-
-            {{-- use multipart/form-data when your form includes any <input type="file"> elements
-otherwise you can use multipart/form-data or application/x-www-form-urlencoded but application/x-www-form-urlencoded will be more efficient --}}
-            <form action="{{route('listing.store')}}" method="POST" enctype="multipart/form-data">
-                {{-- it prevents cros side scripts --}}
+            {{-- HTML form can be only post or get method, but this should be put bcs we editing some data --}}
+            <form action="/listing/{{$listing}}" method="POST" enctype="multipart/form-data">
                 @csrf
+                {{-- that is why laravel prepare @method, there we can set also PUT or DELETE method --}}
+                @method('PUT')
                 <div class="mb-6">
                     <label
                         for="company"
                         class="inline-block text-lg mb-2"
                     >Company Name</label
                     >
-                    {{-- names inside input are important for from --}}
                     <input
                         type="text"
                         class="border border-gray-200 rounded p-2 w-full"
                         name="company"
                         placeholder="Your company name"
-                        {{-- if we get error on validation in controller, old data will be after refresh - old('nameOfProperties') --}}
                         value="{{old('company')}}"
                     />
 
                     @error('company')
-                        <p class="text-red-500 text-xs mt-1">
-                            {{$message}}
-                        </p>
+                    <p class="text-red-500 text-xs mt-1">
+                        {{$message}}
+                    </p>
                     @enderror
                 </div>
 
@@ -177,7 +174,7 @@ otherwise you can use multipart/form-data or application/x-www-form-urlencoded b
                     <button
                         class="bg-laravel text-white rounded py-2 px-4 hover:bg-black"
                     >
-                        Create Gig
+                        Edit Gig
                     </button>
 
                     <a href="/" class="text-black ml-4"> Back </a>
