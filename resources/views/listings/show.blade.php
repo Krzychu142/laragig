@@ -19,8 +19,10 @@
             <img
                 class="w-48 mr-6 mb-6"
                 {{-- asset helper --}}
-                src={{asset('images/no-image.png')}}
-                alt=""
+{{--                src={{asset('images/no-image.png')}}--}}
+                    {{-- php artisan storage:link --}}
+                src="{{ isset($listing['logo']) ? asset('storage/' . $listing['logo']) : asset('images/no-image.png') }}"
+                alt="{{$listing['company']}}"
             />
 
             <h3 class="text-2xl mb-2">{{$listing['title']}}</h3>

@@ -9,7 +9,7 @@ class Listing extends Model
 {
     use HasFactory;
     // fillable - we need to put on this array every property that we want to allow mass assigment
-    protected $fillable = ['title', 'company', 'location', 'email', 'website', 'tags', 'description'];
+    protected $fillable = ['title', 'company', 'location', 'email', 'website', 'tags', 'description', 'logo'];
     // because it is an Eloquent model we declare scopeFunctionName instead of just normal functionName
     // but when we invoiced that function we just say ::filter without scope word
     // $query is instance of builder object - Illuminate\Database\Eloquent\Builder

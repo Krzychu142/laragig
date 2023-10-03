@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            // ->nullable() means it can be null and that is fine
+            $table->string('logo')->nullable();
             $table->string('tags');
             $table->string('company');
             $table->string('location');

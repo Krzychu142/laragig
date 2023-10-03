@@ -73,6 +73,7 @@ class ListingController extends Controller
         // in validate pass the array with rules about data
         $formFields = $request->validate([
             'title' => 'required',
+            'logo',
             // some properties can have more than 1 rule, than use []
             // Rule class :: methods, unique("nameOfTable" "nameOfColumn")
             'company' => ['required', Rule::unique('listings', 'company')],
@@ -83,6 +84,10 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
+        if($request->file('logo') && $request->file('logo')->isValid()){
+            $path = $request->file('logo')->store();
+            $formFields['logo'] = $path;
+        }
         // to show error from validate we need to use @error('nameOfField') directive in view
         // inside this error to enderror we will have access to {{$message}}
         // @enderror

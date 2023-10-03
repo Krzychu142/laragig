@@ -12,8 +12,8 @@ return [
     | based disks are available to your application. Just store away!
     |
     */
-
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    // there we can change way of saving our data
+    'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -32,8 +32,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            // if your images will be public - change the folder
-            'root' => storage_path('public'),
+            'root' => storage_path('app'),
             'throw' => false,
         ],
 
