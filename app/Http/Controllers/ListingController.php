@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+// for delete the old image
+use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller
 {
@@ -143,6 +145,7 @@ class ListingController extends Controller
         }
 
         if ($request->hasFile('logo') && (!$listing->logo || $request->file('logo')->hashName() != $oldLogo)) {
+            Storage::delete($listing->logo);
             $updates['logo'] = $request->file('logo')->store();
         }
 
