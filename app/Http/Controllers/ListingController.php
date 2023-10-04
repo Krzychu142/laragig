@@ -8,6 +8,29 @@ use Illuminate\Validation\Rule;
 
 class ListingController extends Controller
 {
+
+    private function listingValidation(Request $request, bool $isUpdate): array
+    {
+        $companyFieldRules = ['required'];
+
+        if (!$isUpdate) {
+            $companyFieldRules[] = Rule::unique('listings', 'company');
+        }
+
+        return $request->validate([
+            'title' => 'required',
+            'logo',
+            // some properties can have more than 1 rule, than use []
+            // Rule class :: methods, unique("nameOfTable" "nameOfColumn")
+            'company' => $companyFieldRules,
+            'location' => 'required',
+            'website',
+            'email' => ['required', 'email'],
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+    }
+
     // show all listings
     // we can get access to Request object on two-way
     // first is by dependence injection - Pass class Request to index
@@ -72,18 +95,8 @@ class ListingController extends Controller
         // validation in controller
         // $request->all() - will give back all incoming request's inputs
         // in validate pass the array with rules about data
-        $formFields = $request->validate([
-            'title' => 'required',
-            'logo',
-            // some properties can have more than 1 rule, than use []
-            // Rule class :: methods, unique("nameOfTable" "nameOfColumn")
-            'company' => ['required', Rule::unique('listings', 'company')],
-            'location' => 'required',
-            'website',
-            'email' => ['required', 'email'],
-            'tags' => 'required',
-            'description' => 'required'
-        ]);
+
+        $formFields = $this->listingValidation($request, false);
 
         if($request->hasFile('logo')){
             $formFields['logo'] = $request->file('logo')->store();
@@ -110,5 +123,34 @@ class ListingController extends Controller
         return view('listings.edit', [
             "listing" => $listing
         ]);
+    }
+
+    public function update(Request $request, Listing $listing)
+    {
+
+        $formFields = $this->listingValidation($request, true);
+
+        $updates = [];
+        foreach ($formFields as $key => $value) {
+            if ($listing->$key != $value) {
+                $updates[$key] = $value;
+            }
+        }
+
+        $oldLogo = '';
+        if ($listing->logo) {
+            $oldLogo = $listing['logo'];
+        }
+
+        if ($request->hasFile('logo') && (!$listing->logo || $request->file('logo')->hashName() != $oldLogo)) {
+            $updates['logo'] = $request->file('logo')->store();
+        }
+
+        if (!empty($updates)) {
+            $listing->update($updates);
+        }
+
+        // back() will redirect us to current page - like refresh
+        return back()->with('message', 'Job gig updated correctly!');
     }
 }

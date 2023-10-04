@@ -7,10 +7,10 @@
                 <h2 class="text-2xl font-bold uppercase mb-1">
                     Edit {{$listing['title']}}
                 </h2>
-                <p class="mb-4">Post a gig to find a developer</p>
+                <p class="mb-4">Edit data</p>
             </header>
             {{-- HTML form can be only post or get method, but this should be put bcs we editing some data --}}
-            <form action="/listing/{{$listing}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('listing.update', ['listing' => $listing->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- that is why laravel prepare @method, there we can set also PUT or DELETE method --}}
                 @method('PUT')
@@ -25,7 +25,8 @@
                         class="border border-gray-200 rounded p-2 w-full"
                         name="company"
                         placeholder="Your company name"
-                        value="{{old('company')}}"
+                        {{-- old function can take two parameters, first is name of field  --}}
+                        value="{{old('company', $listing->company)}}"
                     />
 
                     @error('company')
@@ -44,7 +45,7 @@
                         class="border border-gray-200 rounded p-2 w-full"
                         name="title"
                         placeholder="Example: Senior Laravel Developer"
-                        value="{{old('title')}}"
+                        value="{{old('title', $listing->title)}}"
                     />
 
                     @error('title')
@@ -65,7 +66,7 @@
                         class="border border-gray-200 rounded p-2 w-full"
                         name="location"
                         placeholder="Example: Remote, Boston MA, etc"
-                        value="{{old('location')}}"
+                        value="{{old('location', $listing->location)}}"
                     />
 
                     @error('location')
@@ -83,7 +84,7 @@
                         type="text"
                         class="border border-gray-200 rounded p-2 w-full"
                         name="email"
-                        value="{{old('email')}}"
+                        value="{{old('email', $listing->email)}}"
                     />
 
                     @error('email')
@@ -104,7 +105,7 @@
                         type="text"
                         class="border border-gray-200 rounded p-2 w-full"
                         name="website"
-                        value="{{old('website')}}"
+                        value="{{old('website', $listing->website)}}"
                     />
 
                     @error('website')
@@ -123,7 +124,7 @@
                         class="border border-gray-200 rounded p-2 w-full"
                         name="tags"
                         placeholder="Example: Laravel, Backend, Postgres, etc"
-                        value="{{old('tags')}}"
+                        value="{{old('tags', $listing->tags)}}"
                     />
 
                     @error('tags')
@@ -142,6 +143,14 @@
                         class="border border-gray-200 rounded p-2 w-full"
                         name="logo"
                     />
+
+                    @if($listing->logo)
+                        <img
+                            class="hidden w-48 mr-6 mt-5 md:block"
+                            src="{{asset('storage/' . $listing->logo)}}"
+                            alt="{{$listing->tags}}"
+                        />
+                    @endif
 
                     @error('logo')
                     <p class="text-red-500 text-xs mt-1">
@@ -162,7 +171,7 @@
                         name="description"
                         rows="10"
                         placeholder="Include tasks, requirements, salary, etc"
-                    >{{old('description')}}</textarea>
+                    >{{old('description', $listing->description)}}</textarea>
                     @error('description')
                     <p class="text-red-500 text-xs mt-1">
                         {{$message}}
@@ -180,6 +189,7 @@
                     <a href="/" class="text-black ml-4"> Back </a>
                 </div>
             </form>
+            <x-flash-message />
         </x-card>
     </div>
 </x-layout>

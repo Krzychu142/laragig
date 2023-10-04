@@ -32,6 +32,7 @@ Route::get('/listing/create', [ListingController::class, 'create']);
 
 Route::get('listing/{listing}/edit', [ListingController::class, 'edit'])->where('listing', '[0-9]+');
 // it should be under create, create can be recognized as {listing}, our route is safe because we are checking this by ->where
+Route::put('listing/{listing}/update', [ListingController::class, 'update'])->where('listing', '[0-9]+')->name('listing.update');
 Route::get('/listing/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 
 
