@@ -139,13 +139,10 @@ class ListingController extends Controller
             }
         }
 
-        $oldLogo = '';
-        if ($listing->logo) {
-            $oldLogo = $listing['logo'];
-        }
-
-        if ($request->hasFile('logo') && (!$listing->logo || $request->file('logo')->hashName() != $oldLogo)) {
-            Storage::delete($listing->logo);
+        if($request->hasFile('logo')){
+            if ($listing->logo) {
+                Storage::delete($listing->logo);
+            }
             $updates['logo'] = $request->file('logo')->store();
         }
 
@@ -156,4 +153,12 @@ class ListingController extends Controller
         // back() will redirect us to current page - like refresh
         return back()->with('message', 'Job gig updated correctly!');
     }
+
+    public function delete(Listing $listing)
+    {
+        // null // app\Http\Controllers\ListingController.php:162
+        $listing->delete();
+        return redirect('/')->with('message', 'Job gig deleted!');
+    }
+
 }
