@@ -156,8 +156,12 @@ class ListingController extends Controller
 
     public function delete(Listing $listing)
     {
-        // null // app\Http\Controllers\ListingController.php:162
+        if ($listing->logo) {
+            Storage::delete($listing->logo);
+        }
+
         $listing->delete();
+
         return redirect('/')->with('message', 'Job gig deleted!');
     }
 
