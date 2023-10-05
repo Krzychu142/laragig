@@ -39,4 +39,14 @@ class UserController extends Controller
 
         return redirect('/')->with('message', "User created and logged in");
     }
+
+
+
+    public function destroy(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+
+        return redirect('/')->with('message', "User logged out");
+    }
 }
