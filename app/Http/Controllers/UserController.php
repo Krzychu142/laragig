@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -10,8 +11,10 @@ class UserController extends Controller
     private function registerValidation(Request $request): array
     {
         return $formFields = $request->validate([
-            'name' => 'require',
-            'email' => ['require', Rule::unique('users', 'email')],
+            'name' => ['required', 'min:3'],
+            'email' => ['required', Rule::unique('users', 'email')],
+            // if some properties have to be confirmed it's mean it must be the same as next one field with the same name + _confirmation
+            'password' => ['required', 'confirmed', 'min:6'],
             // there I end - password validation
         ]);
     }
@@ -25,8 +28,15 @@ class UserController extends Controller
     {
         // there will be validation
 
+        $formFields = $this->registerValidation($request);
+        $formFields['password'] = bcrypt($formFields['password']);
 
+        $user = User::create($formFields);
 
-        return back()->with('message', "message");
+        // Login
+        // auth() helper, login method - pass current created $user
+        auth()->login($user);
+
+        return redirect('/')->with('message', "User created and logged in");
     }
 }
