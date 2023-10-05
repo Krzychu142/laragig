@@ -154,7 +154,7 @@ class ListingController extends Controller
         return back()->with('message', 'Job gig updated correctly!');
     }
 
-    public function delete(Listing $listing)
+    public function destroy(Listing $listing)
     {
         if ($listing->logo) {
             Storage::delete($listing->logo);
