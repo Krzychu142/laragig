@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -49,6 +49,16 @@
                 @endguest
                 @auth
                     <li>
+                        <span class="font-bold uppercase">
+                            Welcome {{auth()->user()->name}}
+                        </span>
+                    </li>
+                    <li>
+                        <a href="/listing/manage" class="hover:text-laravel"
+                        ><i class="fa-solid fa-gear"></i> Manage
+                        </a>
+                    </li>
+                    <li>
                         <form action="/logout" method="POST">
                             @csrf
                             <button type="submit">
@@ -80,3 +90,4 @@
 </html>
 
 {{-- content of layout will be displayed on every page which extends this layout --}}
+`

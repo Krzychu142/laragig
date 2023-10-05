@@ -40,12 +40,17 @@ class UserController extends Controller
         return redirect('/')->with('message', "User created and logged in");
     }
 
-
+    public function login()
+    {
+        return view('users.login');
+    }
 
     public function destroy(Request $request)
     {
         auth()->logout();
         $request->session()->invalidate();
+        // regenerate @csrf token
+        $request->session()->regenerateToken();
 
         return redirect('/')->with('message', "User logged out");
     }
