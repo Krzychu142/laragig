@@ -45,7 +45,6 @@ class ListingController extends Controller
         ]);
     }
 
-    // show single listing
     public function show(Listing $listing)
     {
         $current_user = auth()->user();
