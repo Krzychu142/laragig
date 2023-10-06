@@ -9,11 +9,7 @@
                 </h2>
                 <p class="mb-4">Post a gig to find a developer</p>
             </header>
-
-            {{-- use multipart/form-data when your form includes any <input type="file"> elements
-otherwise you can use multipart/form-data or application/x-www-form-urlencoded but application/x-www-form-urlencoded will be more efficient --}}
             <form action="{{route('listing.store')}}" method="POST" enctype="multipart/form-data">
-                {{-- it prevents cros side scripts --}}
                 @csrf
                 <div class="mb-6">
                     <label
@@ -21,13 +17,11 @@ otherwise you can use multipart/form-data or application/x-www-form-urlencoded b
                         class="inline-block text-lg mb-2"
                     >Company Name</label
                     >
-                    {{-- names inside input are important for from --}}
                     <input
                         type="text"
                         class="border border-gray-200 rounded p-2 w-full"
                         name="company"
                         placeholder="Your company name"
-                        {{-- if we get error on validation in controller, old data will be after refresh - old('nameOfProperties') --}}
                         value="{{old('company')}}"
                     />
 

@@ -66,9 +66,7 @@
                 @endauth
             </ul>
         </nav>
-    {{-- VIEW OUTPUT --}}
         <main>
-        {{-- @yield('content') if it is component - use slot --}}
         {{$slot}}
         </main>
         <footer
@@ -84,5 +82,3 @@
         <x-flash-message />
     </body>
 </html>
-
-{{-- content of layout will be displayed on every page which extends this layout --}}

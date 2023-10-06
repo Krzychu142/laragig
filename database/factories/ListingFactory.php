@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Listing>
  */
-// php artisan make:factory ListingFactory to create factory
 class ListingFactory extends Factory
 {
     /**
@@ -18,7 +17,6 @@ class ListingFactory extends Factory
     public function definition(): array
     {
         return [
-            // we can use here faker
             'title' => $this->faker->sentence(),
             'tags' => 'laravel, api, backend',
             'company' => $this->faker->company(),

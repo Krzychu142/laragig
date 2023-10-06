@@ -1,26 +1,14 @@
-{{-- @extends('layout') --}}
-
-{{-- everything bottom will be displayed in an extended file in place with 'content' or any other name for it, must be the same --}}
-{{-- @section('content') --}}
 <x-layout >
-{{--@include('partials._search')--}}
-
-
 <a href="/" class="inline-block text-black ml-4 mb-4"
     ><i class="fa-solid fa-arrow-left"></i> Back
 </a>
 <div class="mx-4">
-    {{-- <div class="bg-gray-50 border border-gray-200 p-10 rounded"> --}}
-    {{-- if we want to add atribute (class f.e.) we need to go to the component and add this class insde it  --}}
     <x-card >
         <div
             class="flex flex-col items-center justify-center text-center"
         >
             <img
                 class="w-48 mr-6 mb-6"
-                {{-- asset helper --}}
-{{--                src={{asset('images/no-image.png')}}--}}
-                    {{-- php artisan storage:link --}}
                 src="{{ isset($listing['logo']) ? asset('storage/' . $listing['logo']) : asset('images/no-image.png') }}"
                 alt="{{$listing['company']}}"
             />
@@ -69,7 +57,5 @@
             </form>
         </x-card>
     @endif
-    {{-- </div> --}}
 </div>
 </x-layout >
-{{-- @endsection --}}

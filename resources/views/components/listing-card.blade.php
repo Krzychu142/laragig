@@ -1,7 +1,4 @@
-{{-- prosp like in the react --}}
 @props(['listing'])
-
-{{-- <x-card class="border-solid border-2 border-sky-500"> --}}
 <x-card >
     <div class="flex">
         <img
@@ -11,7 +8,6 @@
         />
         <div>
             <h3 class="text-2xl">
-                {{-- when we are dilling with eloquent models it gives us what's called a collection, we can use syntax with the arrow  --}}
                 <a href="/listing/{{$listing->id}}">{{$listing->title}}</a>
             </h3>
             <div class="text-xl font-bold mb-4">{{$listing->company}}</div>

@@ -9,10 +9,8 @@
                 </h2>
                 <p class="mb-4">Edit data</p>
             </header>
-            {{-- HTML form can be only post or get method, but this should be put bcs we editing some data --}}
             <form action="{{route('listing.update', ['listing' => $listing->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
-                {{-- that is why laravel prepare @method, there we can set also PUT or DELETE method --}}
                 @method('PUT')
                 <div class="mb-6">
                     <label
