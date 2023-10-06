@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // relationship with listing
+    public function listing()
+    {
+        // FMI: php artisan thinker
+        return $this->hasMany(Listing::class, 'user_id');
+    }
 }

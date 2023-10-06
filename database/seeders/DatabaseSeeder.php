@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use App\Models\Listing;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,14 +20,20 @@ class DatabaseSeeder extends Seeder
         // it comes from UserFactory.php
         //  artisan db:seed - to run this
         // php artisan migrate:refresh --seed - rollback and seed with fresh data
-        \App\Models\User::factory(2)->create();
+        $user = User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'john@gmail.com',
+            'password' => Hash::make('jonhdoe142')
+        ]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
 
-        Listing::factory(16)->create();
+        Listing::factory(16)->create([
+            'user_id' => $user->id
+        ]);
 
     }
 }

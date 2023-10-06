@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
+            // constrained recognize table user and column id from this table
+            // nameOfTabel_nameOfCoulmn
+            // onDelete('cascade') - if user is deleted, his every listing also will be deleted
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             // ->nullable() means it can be null and that is fine
             $table->string('logo')->nullable();

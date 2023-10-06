@@ -14,7 +14,8 @@ class Listing extends Model
     // but when we invoiced that function we just say ::filter without scope word
     // $query is instance of builder object - Illuminate\Database\Eloquent\Builder
     // with this query we can make query to our DB
-    public function scopeFilter($query, array $filters): void {
+    public function scopeFilter($query, array $filters): void
+    {
         // ?? - isset(), it will return first operand if it exists and is not NULL,
         // otherwise it will return second operand
         // it this case it will work like if we have $filters['tag'] - do something with this tag, if we don't have, just ignore
@@ -31,5 +32,11 @@ class Listing extends Model
                 $query->orWhere($column, 'like', '%' . $filters['search'] . '%');
             }
         }
+    }
+
+    // relationship to user table
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
