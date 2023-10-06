@@ -24,7 +24,6 @@
                 <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
-
             <div class="mb-6">
                 <label
                     for="password"
@@ -41,7 +40,6 @@
                 <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
-
             <div class="mb-6">
                 <button
                     type="submit"
@@ -50,7 +48,6 @@
                     Log In
                 </button>
             </div>
-
             <div class="mt-8">
                 <p>
                     Do not have account yet?

@@ -1,5 +1,4 @@
 <x-layout>
-{{--    <div class="bg-gray-50 border border-gray-200 p-10 rounded">--}}
     <x-card class="p-10">
         <header>
             <h1
@@ -24,7 +23,7 @@
                         class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                     >
                         <a
-                            href="/listing/{{$listing}}/edit"
+                            href="/listing/{{$listing->id}}/edit"
                             class="text-blue-400 px-6 py-2 rounded-xl"
                         ><i
                                 class="fa-solid fa-pen-to-square"
