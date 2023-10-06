@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller
 {
+    private function isUserOwner(Listing $listing): void
+    {
+        if ($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
+    }
 
     private function listingValidation(Request $request, bool $isUpdate): array
     {
+
         $companyFieldRules = ['required'];
 
         if (!$isUpdate) {
@@ -75,8 +82,14 @@ class ListingController extends Controller
 
         // if ($listing) {
         // name convention nameoffolder.nameoffile
+
+        $current_user = auth()->user();
+        $isOwner = $current_user && $listing->user_id == $current_user->id;
+
+
         return view('listings.show', [
-            "listing" => $listing
+            "listing" => $listing,
+            "isOwner" => $isOwner
         ]);
         // } else {
         //     abort('404');
@@ -111,6 +124,7 @@ class ListingController extends Controller
         // if we are here it means validation pass
         // to create new record in DB we need to user Listing::create()
 
+        $formFields['user_id'] = auth()->user()->id;
         Listing::create($formFields);
 
         // flash is message ex. message created, it stored in memory for one-page load
@@ -165,4 +179,8 @@ class ListingController extends Controller
         return redirect('/')->with('message', 'Job gig deleted!');
     }
 
+    public function manage()
+    {
+        return view('listings.manage', ['listings' => auth()->user()->listing]);
+    }
 }

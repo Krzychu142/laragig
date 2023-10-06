@@ -3,7 +3,7 @@
 {{-- everything bottom will be displayed in an extended file in place with 'content' or any other name for it, must be the same --}}
 {{-- @section('content') --}}
 <x-layout >
-@include('partials._search')
+{{--@include('partials._search')--}}
 
 
 <a href="/" class="inline-block text-black ml-4 mb-4"
@@ -55,7 +55,7 @@
             </div>
         </div>
     </x-card >
-    @auth
+    @if($isOwner)
         <x-card class="mt-4 p-2 flex space-x-6">
             <a href="/listing/{{$listing->id}}/edit">
                 <i class="fa-solid fa-pencil"></i> Edit
@@ -68,7 +68,7 @@
                 </button>
             </form>
         </x-card>
-    @endauth
+    @endif
     {{-- </div> --}}
 </div>
 </x-layout >
