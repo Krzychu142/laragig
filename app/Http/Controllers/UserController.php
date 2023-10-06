@@ -53,17 +53,23 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where('email', $formFields['email'])->first();
+//        $user = User::where('email', $formFields['email'])->first();
+//
+//        if (!$user || !Hash::check($formFields['password'], $user->password)) {
+//            return back()->with([
+//                'message' => 'The provided credentials are incorrect.',
+//            ]);
+//        }
 
-        if (!$user || !Hash::check($formFields['password'], $user->password)) {
-            return back()->with([
-                'message' => 'The provided credentials are incorrect.',
-            ]);
+//        auth()->login($user);
+
+        if (auth()->attempt($formFields)) {
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard');
+        } else {
+            return redirect('/')->with('message', 'Logged in!');
         }
 
-        auth()->login($user);
-
-        return redirect('/')->with('message', 'Logged in!');
     }
 
     public function destroy(Request $request)
