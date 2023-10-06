@@ -60,7 +60,7 @@
 
             <div class="mb-6">
                 <label
-                    for="password2"
+                    for="password_confirmation"
                     class="inline-block text-lg mb-2"
                 >
                     Confirm Password

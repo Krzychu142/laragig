@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -40,9 +41,29 @@ class UserController extends Controller
         return redirect('/')->with('message', "User created and logged in");
     }
 
-    public function login()
+    public function showLoginForm()
     {
         return view('users.login');
+    }
+
+    public function login(Request $request)
+    {
+        $formFields = $request->validate([
+            'email' => ['required', 'email:rfc,dns'],
+            'password' => 'required'
+        ]);
+
+        $user = User::where('email', $formFields['email'])->first();
+
+        if (!$user || !Hash::check($formFields['password'], $user->password)) {
+            return back()->with([
+                'message' => 'The provided credentials are incorrect.',
+            ]);
+        }
+
+        auth()->login($user);
+
+        return redirect('/')->with('message', 'Logged in!');
     }
 
     public function destroy(Request $request)
