@@ -60,7 +60,6 @@
                 </p>
             </div>
         </form>
-        <x-flash-message />
     </x-card>
 </x-layout>
 

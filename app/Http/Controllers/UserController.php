@@ -65,9 +65,9 @@ class UserController extends Controller
 
         if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
-        } else {
             return redirect('/')->with('message', 'Logged in!');
+        } else {
+            return back()->withErrors(['email', 'Invalid Credentials'])->onlyInput('email');
         }
 
     }
