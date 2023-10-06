@@ -14,7 +14,7 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-
+    // here we can set other DB
     'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
